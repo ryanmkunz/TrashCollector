@@ -18,11 +18,9 @@ namespace TrashCollection.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [ForeignKey("Address")]
-        [Display(Name = "Address")]
-        public int AddressId { get; set; }
-        public Address Address { get; set; }
-
-        //public IEnumerable<Address> Addresses { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int Zip { get; set; }
     }
 }
