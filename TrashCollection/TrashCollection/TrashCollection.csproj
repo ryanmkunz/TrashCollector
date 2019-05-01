@@ -175,6 +175,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
+    <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\RoleController.cs" />
@@ -193,6 +194,14 @@
     <Compile Include="Migrations\201904301640247_Migration3.cs" />
     <Compile Include="Migrations\201904301640247_Migration3.Designer.cs">
       <DependentUpon>201904301640247_Migration3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905011422065_Migration4.cs" />
+    <Compile Include="Migrations\201905011422065_Migration4.Designer.cs">
+      <DependentUpon>201905011422065_Migration4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201905011428527_Migration5.cs" />
+    <Compile Include="Migrations\201905011428527_Migration5.Designer.cs">
+      <DependentUpon>201905011428527_Migration5.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -298,6 +307,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201904301640247_Migration3.resx">
       <DependentUpon>201904301640247_Migration3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905011422065_Migration4.resx">
+      <DependentUpon>201905011422065_Migration4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905011428527_Migration5.resx">
+      <DependentUpon>201905011428527_Migration5.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
