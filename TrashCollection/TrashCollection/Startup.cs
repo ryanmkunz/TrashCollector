@@ -32,7 +32,7 @@ namespace TrashCollection
                 user.UserName = "ryankunz";
                 user.Email = "ryanmkunz@gmail.com";
 
-                string userPWD = "password";
+                string userPWD = "Password1!";
 
                 var chkUser = UserManager.Create(user, userPWD);
 

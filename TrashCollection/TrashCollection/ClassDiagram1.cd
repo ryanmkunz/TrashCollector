@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Comment CommentText="-UserIdentity.GetUserId()&#xD;&#xA;-Do I need a class for each user type?&#xD;&#xA;-Views&#xD;&#xA;  +pickups&#xD;&#xA;  +employee pickups&#xD;&#xA;  +map&#xD;&#xA;  +customer fees&#xD;&#xA;  +new user&#xD;&#xA;  +home page for each user type">
+  <Comment CommentText="-User.Identity.GetUserId()&#xD;&#xA;-Do I need a class for each user type?&#xD;&#xA;-Views&#xD;&#xA;  +pickups&#xD;&#xA;  +employee pickups&#xD;&#xA;  +map&#xD;&#xA;  +customer fees&#xD;&#xA;  +new user&#xD;&#xA;  +home page for each user type">
     <Position X="11.365" Y="2.24" Height="2.938" Width="1.7" />
   </Comment>
   <Class Name="TrashCollection.Models.Customer">
     <Position X="7.75" Y="2.75" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>TAACAMAAAAAAAQAAAAAAAAAAAAAAAAACIAAAAAAAAAg=</HashCode>
+      <HashCode>DAACAMAAAAAAAQAIAAAACAAAAAAAAAAAIAIABAAAAAg=</HashCode>
       <FileName>Models\Customer.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="TrashCollection.Models.Employee">
     <Position X="4.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QAACAEAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAg=</HashCode>
+      <HashCode>AAACAEAAAAAAAACQAAAACAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
       <FileName>Models\Employee.cs</FileName>
     </TypeIdentifier>
   </Class>

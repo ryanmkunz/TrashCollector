@@ -17,7 +17,12 @@ namespace TrashCollection.Models
 
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
-        
+
+        [ForeignKey("ApplicationUser")]
+        [Display(Name = "UserId")]
+        public string ApplicationUserId { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
         public int Zip { get; set; }
     }
 }

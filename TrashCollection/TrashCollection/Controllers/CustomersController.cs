@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollection.Models;
+using Microsoft.AspNet.Identity;
 
 namespace TrashCollection.Controllers
 {
@@ -17,6 +18,7 @@ namespace TrashCollection.Controllers
         // GET: Customers
         public ActionResult Index()
         {
+            var temp = db.Employees.Where(e => e.Id == User.Identity.GetUserId().SingleOrDefault());
             return View(db.Customers.ToList());
         }
 
