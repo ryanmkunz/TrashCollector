@@ -18,10 +18,14 @@ namespace TrashCollection.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var CurrentEmployee = db.Employees.Where(e => e.ApplicationUserId == userLoggedIn).SingleOrDefault();
-            var LocalCustomers = db.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
-            return View(LocalCustomers);
+            //if (Current user is in customer table)
+            //{
+            //    var userLoggedIn = User.Identity.GetUserId();
+            //    var CurrentCustomer = db.Customers.Where(c => c.ApplicationUserId == userLoggedIn).SingleOrDefault();
+            //    return View(CurrentCustomer);
+            //}
+            return View();
+            
         }
 
         // GET: Customers/Details/5
@@ -54,6 +58,8 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.ApplicationUserId = User.Identity.GetUserId();
+                //customer.OneTimePickupDay = 
                 db.Customers.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");

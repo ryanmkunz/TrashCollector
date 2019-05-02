@@ -9,9 +9,9 @@ namespace TrashCollection
 {
     public partial class Startup
     {
-        public void Configuration(IAppBuilder app)
+        public void Configuration(IAppBuilder app) //Start point
         {
-            ConfigureAuth(app);
+            ConfigureAuth(app); 
             createRolesandUsers();
         }
 
