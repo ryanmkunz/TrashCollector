@@ -27,7 +27,7 @@ namespace TrashCollection.Models
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd")]
         public DateTime TempStopEnd { get; set; }
-
+        
         public double Bill { get; set; }
         public string Street { get; set; }
         public string City { get; set; }

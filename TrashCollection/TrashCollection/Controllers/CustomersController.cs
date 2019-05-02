@@ -18,14 +18,16 @@ namespace TrashCollection.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            //if (Current user is in customer table)
-            //{
-            //    var userLoggedIn = User.Identity.GetUserId();
-            //    var CurrentCustomer = db.Customers.Where(c => c.ApplicationUserId == userLoggedIn).SingleOrDefault();
-            //    return View(CurrentCustomer);
-            //}
-            return View();
-            
+            var userLoggedIn = User.Identity.GetUserId();
+            var CurrentCustomer = db.Customers.Where(c => c.ApplicationUserId == userLoggedIn).SingleOrDefault();
+            if (CurrentCustomer == null)
+            {
+                return RedirectToAction("Create");                
+            }
+            else
+            {
+                return RedirectToAction("Details", new { id = CurrentCustomer.Id });
+            }
         }
 
         // GET: Customers/Details/5
@@ -58,11 +60,10 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.ApplicationUserId = User.Identity.GetUserId();
-                //customer.OneTimePickupDay = 
+                customer.ApplicationUserId = User.Identity.GetUserId(); 
                 db.Customers.Add(customer);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", customer.Id);
             }
 
             return View(customer);
@@ -94,7 +95,7 @@ namespace TrashCollection.Controllers
             {
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details");
             }
             return View(customer);
         }
