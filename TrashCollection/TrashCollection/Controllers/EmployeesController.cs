@@ -11,16 +11,13 @@ using TrashCollection.Models;
 
 namespace TrashCollection.Controllers
 {
-    public class EmployeesController : Controller
+    public class EmployeesController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Employees
         public ActionResult Index()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var CurrentEmployee = db.Employees.Where(e => e.ApplicationUserId == userLoggedIn).SingleOrDefault();
-            var LocalCustomers = db.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
+            var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == UserId).SingleOrDefault();
+            var LocalCustomers = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
             return View(LocalCustomers);
         }
 
@@ -31,7 +28,7 @@ namespace TrashCollection.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = Context.Employees.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -55,8 +52,8 @@ namespace TrashCollection.Controllers
             if (ModelState.IsValid)
             {
                 employee.ApplicationUserId = User.Identity.GetUserId();
-                db.Employees.Add(employee);
-                db.SaveChanges();
+                Context.Employees.Add(employee);
+                Context.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -70,7 +67,7 @@ namespace TrashCollection.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = Context.Employees.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -87,8 +84,8 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
-                db.SaveChanges();
+                Context.Entry(employee).State = EntityState.Modified;
+                Context.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View(employee);
@@ -101,7 +98,7 @@ namespace TrashCollection.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Employee employee = db.Employees.Find(id);
+            Employee employee = Context.Employees.Find(id);
             if (employee == null)
             {
                 return HttpNotFound();
@@ -114,9 +111,9 @@ namespace TrashCollection.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Employee employee = db.Employees.Find(id);
-            db.Employees.Remove(employee);
-            db.SaveChanges();
+            Employee employee = Context.Employees.Find(id);
+            Context.Employees.Remove(employee);
+            Context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -124,7 +121,7 @@ namespace TrashCollection.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }
