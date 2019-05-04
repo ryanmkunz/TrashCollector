@@ -11,15 +11,12 @@ using Microsoft.AspNet.Identity;
 
 namespace TrashCollection.Controllers
 {
-    public class CustomersController : Controller
+    public class CustomersController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Customers
         public ActionResult Index()
         {
-            var userLoggedIn = User.Identity.GetUserId();
-            var CurrentCustomer = db.Customers.Where(c => c.ApplicationUserId == userLoggedIn).SingleOrDefault();
+            var CurrentCustomer = Context.Customers.Where(c => c.ApplicationUserId == UserId).SingleOrDefault();
             if (CurrentCustomer == null)
             {
                 return RedirectToAction("Create");                
@@ -37,7 +34,7 @@ namespace TrashCollection.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = Context.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -60,9 +57,11 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.ApplicationUserId = User.Identity.GetUserId(); 
-                db.Customers.Add(customer);
-                db.SaveChanges();
+                customer.ApplicationUserId = User.Identity.GetUserId();
+				//customer.ApplicationUser = new ApplicationUser();
+
+				Context.Customers.Add(customer);
+                Context.SaveChanges();
                 return RedirectToAction("Details", customer.Id);
             }
 
@@ -76,7 +75,7 @@ namespace TrashCollection.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = Context.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -93,8 +92,8 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customer).State = EntityState.Modified;
-                db.SaveChanges();
+                Context.Entry(customer).State = EntityState.Modified;
+                Context.SaveChanges();
                 return RedirectToAction("Details");
             }
             return View(customer);
@@ -107,7 +106,7 @@ namespace TrashCollection.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Customer customer = db.Customers.Find(id);
+            Customer customer = Context.Customers.Find(id);
             if (customer == null)
             {
                 return HttpNotFound();
@@ -120,9 +119,9 @@ namespace TrashCollection.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Customer customer = db.Customers.Find(id);
-            db.Customers.Remove(customer);
-            db.SaveChanges();
+            Customer customer = Context.Customers.Find(id);
+            Context.Customers.Remove(customer);
+            Context.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -130,7 +129,7 @@ namespace TrashCollection.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                Context.Dispose();
             }
             base.Dispose(disposing);
         }

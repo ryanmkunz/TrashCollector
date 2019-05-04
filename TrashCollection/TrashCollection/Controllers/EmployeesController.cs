@@ -13,13 +13,35 @@ namespace TrashCollection.Controllers
 {
     public class EmployeesController : BaseController
     {
+		//private ApplicationDbContext Context = new ApplicationDbContext();
+
         // GET: Employees
         public ActionResult Index()
         {
-            var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == UserId).SingleOrDefault();
-            var LocalCustomers = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
-            return View(LocalCustomers);
-        }
+			var CurrentEmployee = Context.Employees.Where(c => c.ApplicationUserId == UserId).SingleOrDefault();
+			if (CurrentEmployee == null)
+			{
+				return RedirectToAction("Create");
+			}
+			else
+			{
+				var LocalCustomers = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
+				return RedirectToAction("CustomersInZip", LocalCustomers);
+			}
+		}
+
+		public ActionResult CustomersInZip()
+		{
+			var CurrentUserId = User.Identity.GetUserId();
+			var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == CurrentUserId).SingleOrDefault();
+			var customersInZip = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
+			return RedirectToAction("CustomersInZip", customersInZip);
+		}
+		[HttpPost]
+		public ActionResult CustomersInZip(List<Customer> customers)
+		{
+			return View(customers);
+		}
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)
@@ -52,10 +74,11 @@ namespace TrashCollection.Controllers
             if (ModelState.IsValid)
             {
                 employee.ApplicationUserId = User.Identity.GetUserId();
-                Context.Employees.Add(employee);
+				//employee.ApplicationUser = new ApplicationUser();
+                Context.Employees.Add(employee); //this seems to do nothing
                 Context.SaveChanges();
-                return RedirectToAction("Index");
-            }
+				return RedirectToAction("CustomersInZip");
+			}
 
             return View(employee);
         }

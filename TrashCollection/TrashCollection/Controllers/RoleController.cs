@@ -9,9 +9,8 @@ using TrashCollection.Models;
 
 namespace TrashCollection.Controllers
 {
-    public class RoleController : Controller
+    public class RoleController : BaseController
     {
-        ApplicationDbContext context = new ApplicationDbContext();
         // GET: Role
         public ActionResult Index()
         {
@@ -26,7 +25,7 @@ namespace TrashCollection.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            var Roles = context.Roles.ToList();
+            var Roles = Context.Roles.ToList();
             return View(Roles);
         }
         public Boolean isAdminUser()
@@ -35,7 +34,7 @@ namespace TrashCollection.Controllers
             {
                 var user = User.Identity;
                 
-                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(Context));
                 var s = UserManager.GetRoles(user.GetUserId());
                 if (s[0].ToString() == "Admin")
                 {
