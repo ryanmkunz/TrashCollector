@@ -37,6 +37,7 @@ namespace TrashCollection.Models
         public string City { get; set; }
         public string State { get; set; }
         public int Zip { get; set; }
+        public string FullAddress { get; set; }
 
         [ForeignKey("ApplicationUser")]
         [Display(Name = "UserId")]

@@ -5,6 +5,13 @@ using Microsoft.Owin.Security;
 
 namespace TrashCollection.Models
 {
+    public class LocationViewModel
+    {
+        public Customer customer;
+        public double latitude;
+        public double longitude;
+    }
+
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

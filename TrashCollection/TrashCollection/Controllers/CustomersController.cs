@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using TrashCollection.Models;
-using Microsoft.AspNet.Identity;
+
 
 namespace TrashCollection.Controllers
 {
@@ -59,6 +56,7 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
+                customer.FullAddress = (customer.Street + ", " + customer.City + ", " + customer.State + customer.Zip);                
                 customer.ApplicationUserId = UserId;
                 customer.Bill = 0;
 				Context.Customers.Add(customer);

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using TrashCollection.Models;
 
 namespace TrashCollection.Controllers
@@ -30,24 +31,51 @@ namespace TrashCollection.Controllers
 		}
 
 		public ActionResult CustomersInZip()
-		{
+		{            
 			var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == UserId).SingleOrDefault();
 			var customersInZip = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).Where(c => c.StartPickups <= DateTime.Today).ToList();
             return View(customersInZip);
 		}
 
-        public ActionResult CustomersInZipAnyDay(IEnumerable<Customer> customers)
+        public ActionResult CustomersInZipAnyDay()
         {
-            var customersInZipToday = customers.Where(c => c.StartPickups <= DateTime.Today);
-            return View(customersInZipToday);
+            var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == UserId).SingleOrDefault();
+            var customersInZipAnyDay = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip);
+            return View(customersInZipAnyDay);
         }
 
         public ActionResult CompletePickup(int? id)
         {
+            var currentCustomer = Context.Customers.Find(id);
             DateTime newDate = DateTime.Today.AddDays(1);
-            Context.Customers.Find(id).StartPickups = newDate;
+            double newBill = currentCustomer.Bill + 7.50;
+
+            currentCustomer.StartPickups = newDate;
+            currentCustomer.Bill = newBill;
+            
             Context.SaveChanges();
             return RedirectToAction("CustomersInZip");
+        }
+
+        public ActionResult ShowMap(int? id)
+        {            
+            string requestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAgLf7eJrlMl3r9OeTofUeBM06a59Ackjk";
+            LocationViewModel locationViewModel = new LocationViewModel();            
+            var customers = Context.Customers.Where(c => c.Id == id).SingleOrDefault();
+            locationViewModel.customer = customers;
+            WebRequest request = WebRequest.Create(requestUrl);
+            WebResponse response = request.GetResponse();
+            XDocument xdoc = XDocument.Load(response.GetResponseStream());
+
+            XElement result = xdoc.Element("GeocodeResponse").Element("result");
+            XElement locationElement = result.Element("geometry").Element("location");
+            XElement lat = locationElement.Element("lat");
+            XElement lng = locationElement.Element("lng");
+
+            locationViewModel.latitude = double.Parse(lat);
+            locationViewModel.longitude = double.Parse(lng);
+
+            return View(locationViewModel);
         }
 
         // GET: Employees/Details/5
