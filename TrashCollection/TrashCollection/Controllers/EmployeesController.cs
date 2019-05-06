@@ -32,9 +32,23 @@ namespace TrashCollection.Controllers
 		public ActionResult CustomersInZip()
 		{
 			var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == UserId).SingleOrDefault();
-			var customersInZip = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
+			var customersInZip = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).Where(c => c.StartPickups <= DateTime.Today).ToList();
             return View(customersInZip);
 		}
+
+        public ActionResult CustomersInZipAnyDay(IEnumerable<Customer> customers)
+        {
+            var customersInZipToday = customers.Where(c => c.StartPickups <= DateTime.Today);
+            return View(customersInZipToday);
+        }
+
+        public ActionResult CompletePickup(int? id)
+        {
+            DateTime newDate = DateTime.Today.AddDays(1);
+            Context.Customers.Find(id).StartPickups = newDate;
+            Context.SaveChanges();
+            return RedirectToAction("CustomersInZip");
+        }
 
         // GET: Employees/Details/5
         public ActionResult Details(int? id)

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TrashCollection.Models.Customer>
 
 @{
-    ViewBag.Title = "CustomersInZip";
+    ViewBag.Title = "CustomersInZipAnyDay";
 }
 
 <h2>Index</h2>
@@ -85,7 +85,7 @@
             </td>
             <td>
                 @Html.ActionLink("Complete Pickup", "CompletePickup", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |                
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
             </td>
         </tr>
     }

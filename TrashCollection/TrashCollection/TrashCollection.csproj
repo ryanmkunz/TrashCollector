@@ -184,57 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201904301511106_InitialMigration.cs" />
-    <Compile Include="Migrations\201904301511106_InitialMigration.Designer.cs">
-      <DependentUpon>201904301511106_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904301607239_Migration2.cs" />
-    <Compile Include="Migrations\201904301607239_Migration2.Designer.cs">
-      <DependentUpon>201904301607239_Migration2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201904301640247_Migration3.cs" />
-    <Compile Include="Migrations\201904301640247_Migration3.Designer.cs">
-      <DependentUpon>201904301640247_Migration3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011422065_Migration4.cs" />
-    <Compile Include="Migrations\201905011422065_Migration4.Designer.cs">
-      <DependentUpon>201905011422065_Migration4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011428527_Migration5.cs" />
-    <Compile Include="Migrations\201905011428527_Migration5.Designer.cs">
-      <DependentUpon>201905011428527_Migration5.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011526182_Migration6.cs" />
-    <Compile Include="Migrations\201905011526182_Migration6.Designer.cs">
-      <DependentUpon>201905011526182_Migration6.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011826035_Migration7.cs" />
-    <Compile Include="Migrations\201905011826035_Migration7.Designer.cs">
-      <DependentUpon>201905011826035_Migration7.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011830256_Migration8.cs" />
-    <Compile Include="Migrations\201905011830256_Migration8.Designer.cs">
-      <DependentUpon>201905011830256_Migration8.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011912569_Migration81.cs" />
-    <Compile Include="Migrations\201905011912569_Migration81.Designer.cs">
-      <DependentUpon>201905011912569_Migration81.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905011957463_Migraton9.cs" />
-    <Compile Include="Migrations\201905011957463_Migraton9.Designer.cs">
-      <DependentUpon>201905011957463_Migraton9.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905021640077_Migration10.cs" />
-    <Compile Include="Migrations\201905021640077_Migration10.Designer.cs">
-      <DependentUpon>201905021640077_Migration10.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905021935062_Migration12.cs" />
-    <Compile Include="Migrations\201905021935062_Migration12.Designer.cs">
-      <DependentUpon>201905021935062_Migration12.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201905021943482_Migration13.cs" />
-    <Compile Include="Migrations\201905021943482_Migration13.Designer.cs">
-      <DependentUpon>201905021943482_Migration13.cs</DependentUpon>
+    <Compile Include="Migrations\201905061506550_thing2.cs" />
+    <Compile Include="Migrations\201905061506550_thing2.Designer.cs">
+      <DependentUpon>201905061506550_thing2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -318,6 +270,7 @@
     <Content Include="Views\Employees\_ViewStart.cshtml" />
     <Content Include="Views\Customers\_ViewStart.cshtml" />
     <Content Include="Views\Employees\CustomersInZip.cshtml" />
+    <Content Include="Views\Employees\CustomersInZipAnyDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -337,44 +290,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201904301511106_InitialMigration.resx">
-      <DependentUpon>201904301511106_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904301607239_Migration2.resx">
-      <DependentUpon>201904301607239_Migration2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201904301640247_Migration3.resx">
-      <DependentUpon>201904301640247_Migration3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011422065_Migration4.resx">
-      <DependentUpon>201905011422065_Migration4.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011428527_Migration5.resx">
-      <DependentUpon>201905011428527_Migration5.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011526182_Migration6.resx">
-      <DependentUpon>201905011526182_Migration6.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011826035_Migration7.resx">
-      <DependentUpon>201905011826035_Migration7.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011830256_Migration8.resx">
-      <DependentUpon>201905011830256_Migration8.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011912569_Migration81.resx">
-      <DependentUpon>201905011912569_Migration81.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905011957463_Migraton9.resx">
-      <DependentUpon>201905011957463_Migraton9.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905021640077_Migration10.resx">
-      <DependentUpon>201905021640077_Migration10.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905021935062_Migration12.resx">
-      <DependentUpon>201905021935062_Migration12.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201905021943482_Migration13.resx">
-      <DependentUpon>201905021943482_Migration13.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201905061506550_thing2.resx">
+      <DependentUpon>201905061506550_thing2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
