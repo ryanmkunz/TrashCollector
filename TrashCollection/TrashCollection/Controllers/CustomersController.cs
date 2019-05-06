@@ -13,6 +13,8 @@ namespace TrashCollection.Controllers
 {
     public class CustomersController : BaseController
     {
+        public ApplicationDbContext Context = new ApplicationDbContext();
+
         // GET: Customers
         public ActionResult Index()
         {
@@ -57,12 +59,10 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.ApplicationUserId = User.Identity.GetUserId();
-				//customer.ApplicationUser = new ApplicationUser();
-
+                customer.ApplicationUserId = UserId;
 				Context.Customers.Add(customer);
                 Context.SaveChanges();
-                return RedirectToAction("Details", customer.Id);
+                return RedirectToAction("Details", new { id = customer.Id });
             }
 
             return View(customer);

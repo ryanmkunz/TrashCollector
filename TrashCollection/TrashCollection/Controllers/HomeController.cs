@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TrashCollection.Models;
 
 namespace TrashCollection.Controllers
 {
     public class HomeController : BaseController
     {
+        public ApplicationDbContext Context = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             if(string.IsNullOrEmpty(UserId))

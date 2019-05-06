@@ -13,7 +13,7 @@ namespace TrashCollection.Controllers
 {
     public class EmployeesController : BaseController
     {
-		//private ApplicationDbContext Context = new ApplicationDbContext();
+		public ApplicationDbContext Context = new ApplicationDbContext();
 
         // GET: Employees
         public ActionResult Index()
@@ -25,22 +25,15 @@ namespace TrashCollection.Controllers
 			}
 			else
 			{
-				var LocalCustomers = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
-				return RedirectToAction("CustomersInZip", LocalCustomers);
+				return RedirectToAction("CustomersInZip");
 			}
 		}
 
 		public ActionResult CustomersInZip()
 		{
-			var CurrentUserId = User.Identity.GetUserId();
-			var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == CurrentUserId).SingleOrDefault();
+			var CurrentEmployee = Context.Employees.Where(e => e.ApplicationUserId == UserId).SingleOrDefault();
 			var customersInZip = Context.Customers.Where(c => c.Zip == CurrentEmployee.Zip).ToList();
-			return RedirectToAction("CustomersInZip", customersInZip);
-		}
-		[HttpPost]
-		public ActionResult CustomersInZip(List<Customer> customers)
-		{
-			return View(customers);
+            return View(customersInZip);
 		}
 
         // GET: Employees/Details/5
@@ -73,11 +66,18 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                employee.ApplicationUserId = User.Identity.GetUserId();
-				//employee.ApplicationUser = new ApplicationUser();
-                Context.Employees.Add(employee); //this seems to do nothing
-                Context.SaveChanges();
-				return RedirectToAction("CustomersInZip");
+                try
+                {
+                    employee.ApplicationUserId = UserId;
+                    Context.Employees.Add(employee); 
+                    Context.SaveChanges();
+                    return RedirectToAction("CustomersInZip");
+                }
+                catch (Exception)
+                {
+                    return View();                    
+                }
+                
 			}
 
             return View(employee);

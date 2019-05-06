@@ -11,6 +11,8 @@ namespace TrashCollection.Controllers
 {
     public class RoleController : BaseController
     {
+        public ApplicationDbContext Context = new ApplicationDbContext();
+
         // GET: Role
         public ActionResult Index()
         {
