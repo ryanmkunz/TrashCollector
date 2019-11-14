@@ -14,6 +14,7 @@ namespace TrashCollection.Controllers
 
         //public ApplicationDbContext Context = new ApplicationDbContext();
 
+        public const double StandardRate = 7.50;
         
         
         public string GetUserId()

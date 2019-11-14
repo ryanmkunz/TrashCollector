@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNet.Identity;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -48,7 +49,7 @@ namespace TrashCollection.Controllers
         {
             var currentCustomer = Context.Customers.Find(id);
             DateTime newDate = DateTime.Today.AddDays(1);
-            double newBill = currentCustomer.Bill + 7.50;
+            double newBill = currentCustomer.Bill + StandardRate;
 
             currentCustomer.StartPickups = newDate;
             currentCustomer.Bill = newBill;
@@ -59,23 +60,29 @@ namespace TrashCollection.Controllers
 
         public ActionResult ShowMap(int? id)
         {            
-            string requestUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAgLf7eJrlMl3r9OeTofUeBM06a59Ackjk";
-            LocationViewModel locationViewModel = new LocationViewModel();            
-            var customers = Context.Customers.Where(c => c.Id == id).SingleOrDefault();
-            locationViewModel.customer = customers;
-            WebRequest request = WebRequest.Create(requestUrl);
-            WebResponse response = request.GetResponse();
-            XDocument xdoc = XDocument.Load(response.GetResponseStream());
-
-            XElement result = xdoc.Element("GeocodeResponse").Element("result");
-            XElement locationElement = result.Element("geometry").Element("location");
-            XElement lat = locationElement.Element("lat");
-            XElement lng = locationElement.Element("lng");
-
-            locationViewModel.latitude = double.Parse(lat);
-            locationViewModel.longitude = double.Parse(lng);
-
-            return View(locationViewModel);
+            //string requestUri = string.Format("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=AIzaSyAgLf7eJrlMl3r9OeTofUeBM06a59Ackjk");
+            //WebRequest request = WebRequest.Create(requestUri);
+            //WebResponse response = request.GetResponse();
+            //XDocument xdoc = XDocument.Load(response.GetResponseStream());
+            //XElement result = xdoc.Element("GeocodeResponse").Element("result");
+            //XElement locationElement = result.Element("geometry").Element("location");
+            //XElement lat = locationElement.Element("lat");
+            //XElement lng = locationElement.Element("lng");
+            //string address = "123 something st, somewhere";
+            //string requestUri = string.Format("http://maps.googleapis.com/maps/api/geocode/xml?address={0}&sensor=false&key=AIzaSyAgLf7eJrlMl3r9OeTofUeBM06a59Ackjk", Uri.EscapeDataString(address));
+            //WebRequest request = WebRequest.Create(requestUri);
+            //WebResponse response = request.GetResponse();
+            //XDocument xdoc = XDocument.Load(response.GetResponseStream());
+            //XElement result = xdoc.Element("GeocodeResponse").Element("result");
+            //XElement locationElement = result.Element("geometry").Element("location");
+            //XElement lat = locationElement.Element("lat");
+            //XElement lng = locationElement.Element("lng");
+            //LocationViewModel locationViewModel = new LocationViewModel();
+            //var customers = Context.Customers.Where(c => c.Id == id).SingleOrDefault();
+            //locationViewModel.customer = customers;
+            //locationViewModel.latitude = double.Parse(lat.Value);
+            //locationViewModel.longitude = double.Parse(lng.Value);
+            return View();
         }
 
         // GET: Employees/Details/5
@@ -118,13 +125,11 @@ namespace TrashCollection.Controllers
                 catch (Exception)
                 {
                     return View();                    
-                }
-                
+                }                
 			}
 
             return View(employee);
         }
-
         // GET: Employees/Edit/5
         public ActionResult Edit(int? id)
         {

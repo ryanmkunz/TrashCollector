@@ -56,7 +56,7 @@ namespace TrashCollection.Controllers
         {
             if (ModelState.IsValid)
             {
-                customer.FullAddress = (customer.Street + ", " + customer.City + ", " + customer.State + customer.Zip);                
+                customer.FullAddress = (customer.Street + ", " + customer.City + ", " + customer.State +", "+ customer.Zip);                
                 customer.ApplicationUserId = UserId;
                 customer.Bill = 0;
 				Context.Customers.Add(customer);
@@ -87,7 +87,7 @@ namespace TrashCollection.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,WeeklyPickupDay,OneTimePickupDay,TempStopStart,TempStopEnd,Bill,Street,City,State,Zip")] Customer customer)
+        public ActionResult Edit([Bind(Include = "Id,WeeklyPickupDay,OneTimePickupDay,TempStopStart,TempStopEnd,Street,City,State,Zip")] Customer customer)
         {
             if (ModelState.IsValid)
             {

@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201905061506550_thing2.Designer.cs">
       <DependentUpon>201905061506550_thing2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201905062359576_googleApi.cs" />
+    <Compile Include="Migrations\201905062359576_googleApi.Designer.cs">
+      <DependentUpon>201905062359576_googleApi.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -302,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201905061506550_thing2.resx">
       <DependentUpon>201905061506550_thing2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201905062359576_googleApi.resx">
+      <DependentUpon>201905062359576_googleApi.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
